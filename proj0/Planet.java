@@ -1,6 +1,6 @@
 public class Planet
 {
-    public static final double G = 6.67e-11;
+    private static final double G = 6.67e-11;
     public double xxPos;
     public double yyPos;
     public double xxVel;
@@ -67,7 +67,7 @@ public class Planet
         this.xxPos += this.xxVel * dt;
         this.yyPos += this.yyVel * dt;
     }
-    public void draw(){
+    private void draw(){
         StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
     }
 }  
