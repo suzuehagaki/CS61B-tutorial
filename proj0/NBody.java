@@ -16,14 +16,6 @@ public class NBody {
         return planets;
     }
 
-    public static void draw(Planet[] p){
-        StdDraw.clear();
-        StdDraw.picture(0,0,"./images/starfield.jpg");
-        for(int i = 0; i < p.length; i++){
-            p[i].draw();
-        }
-    }
-
     public static void main(String[] args){
         double T = Double.parseDouble(args[0]);
         double dt = Double.parseDouble(args[1]);
@@ -31,8 +23,12 @@ public class NBody {
         double radius = readRadius(fileName);
         Planet[] planets = readPlanets(fileName);
         StdDraw.setScale(-radius,radius);
-        draw(planets);
         StdDraw.enableDoubleBuffering();
+        StdDraw.clear();
+        StdDraw.picture(0,0,"./images/starfield.jpg");
+        for(int i = 0; i < planets.length; i++){
+            planets[i].draw();
+        }
 
         double currentTime = 0;
         double[] xForce = new double[planets.length];
@@ -45,7 +41,11 @@ public class NBody {
             for(int i = 0; i<planets.length;i++){
                 planets[i].update(dt,xForce[i],yForce[i]);
             }
-            draw(planets);
+            StdDraw.clear();
+            StdDraw.picture(0,0,"./images/starfield.jpg");
+            for(int i = 0; i < planets.length; i++){
+                planets[i].draw();
+            }
             StdDraw.show();
             StdDraw.pause(10);
             currentTime += dt;
