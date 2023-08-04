@@ -22,6 +22,11 @@ public class ArrayDeque<T> {
             size = size + 1;
             return;
         }
+        if (size == 0) {
+            array[first] = item;
+            size = size + 1;
+            return;
+        }
         first = (first - 1 + array.length) % array.length;
         array[first] = item;
         size = size + 1;
@@ -40,8 +45,9 @@ public class ArrayDeque<T> {
             size = size + 1;
             return;
         }
-        if(size == 0) {
+        if (size == 0) {
             array[end] = item;
+            size = size + 1;
             return;
         }
         end = (end + 1) % array.length;
@@ -106,6 +112,7 @@ public class ArrayDeque<T> {
             return rValue;
         }
         T rValue = array[end];
+        array[end] = null;
         end = (end - 1) % array.length;
         size = size - 1;
         return rValue;
@@ -118,18 +125,4 @@ public class ArrayDeque<T> {
         return array[(first + index) % array.length];
     }
 
-    public static void main(String[] args) {
-        ArrayDeque<Integer> A = new ArrayDeque<>();
-        A.isEmpty();
-        A.isEmpty();
-        A.addLast(2);
-        A.addLast(3);
-        A.addLast(4);
-        A.addLast(5);
-        A.addLast(6);
-        A.addLast(7);
-        A.addLast(8);
-        A.removeFirst();
-
-    }
 }
