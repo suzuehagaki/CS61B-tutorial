@@ -24,6 +24,7 @@ public class ArrayDeque<T> {
         }
         if (size == 0) {
             array[first] = item;
+            end = first;
             size = size + 1;
             return;
         }
@@ -47,6 +48,7 @@ public class ArrayDeque<T> {
         }
         if (size == 0) {
             array[end] = item;
+            first = end;
             size = size + 1;
             return;
         }
@@ -100,7 +102,7 @@ public class ArrayDeque<T> {
         }
         if (array.length >= 16 && size < (array.length / 4)) {
             T rValue = array[end];
-            end = (end - 1) % array.length;
+            end = (end - 1 + array.length) % array.length;
             size = size - 1;
             T[] temp = (T[]) new Object[array.length / 2];
             for (int i = 0; i < size; i++) {
@@ -113,7 +115,7 @@ public class ArrayDeque<T> {
         }
         T rValue = array[end];
         array[end] = null;
-        end = (end - 1) % array.length;
+        end = (end - 1 + array.length) % array.length;
         size = size - 1;
         return rValue;
     }
