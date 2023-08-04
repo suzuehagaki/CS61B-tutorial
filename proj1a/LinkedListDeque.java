@@ -82,6 +82,7 @@ public class LinkedListDeque<T> {
             return item;
         }
         first = first.next;
+        first.pre = end;
         end.next = first;
         size = size - 1;
         return item;
@@ -100,6 +101,7 @@ public class LinkedListDeque<T> {
         }
         end = end.pre;
         first.pre = end;
+        end.next = first;
         size = size - 1;
         return item;
     }
