@@ -33,6 +33,8 @@ public class TestPalindrome {
         assertTrue(!palindrome.isPalindrome("cat", obo));
         assertTrue(palindrome.isPalindrome("truss", obo));
         assertTrue(palindrome.isPalindrome("&%", obo));
+        assertTrue(!palindrome.isPalindrome("CBBc", obo));
+        assertTrue(palindrome.isPalindrome("CbbC", obo));
 
         OffByN obn = new OffByN(3);
         assertTrue(!palindrome.isPalindrome("mack", obn));
