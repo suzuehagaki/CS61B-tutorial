@@ -9,8 +9,27 @@ public class ArrayDeque<T> {
         first = 0;
         end = 0;
     }
+
+    /** create a resize method to avoid code repeating itself */
+    private void resize(int newSize) {
+        T[] temp = (T[]) new Object[newSize];
+        for (int i = 0; i < array.length; i++) {
+            temp[i] = array[(first + i + array.length) % array.length];
+        }
+        first = 0;
+        end = size - 1;
+        array = temp;
+    }
+
     public void addFirst(T item) {
+        if (size == 0) {
+            array[first] = item;
+            end = first;
+            size = size + 1;
+            return;
+        }
         if (size == array.length) {
+            /* ugly original code
             T[] temp = (T[]) new Object[array.length * 2];
             for (int i = 0; i < array.length; i++) {
                 temp[i + 1] = array[(first + i + array.length) % array.length];
@@ -21,12 +40,8 @@ public class ArrayDeque<T> {
             array[first] = item;
             size = size + 1;
             return;
-        }
-        if (size == 0) {
-            array[first] = item;
-            end = first;
-            size = size + 1;
-            return;
+            */
+            resize(array.length * 2);
         }
         first = (first - 1 + array.length) % array.length;
         array[first] = item;
@@ -34,7 +49,14 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
+        if (size == 0) {
+            array[end] = item;
+            first = end;
+            size = size + 1;
+            return;
+        }
         if (size == array.length) {
+            /* ugly original code
             T[] temp = (T[]) new Object[array.length * 2];
             for (int i = 0; i < array.length; i++) {
                 temp[i] = array[(first + i) % array.length];
@@ -45,12 +67,8 @@ public class ArrayDeque<T> {
             array[end] = item;
             size = size + 1;
             return;
-        }
-        if (size == 0) {
-            array[end] = item;
-            first = end;
-            size = size + 1;
-            return;
+            */
+            resize(array.length * 2);
         }
         end = (end + 1) % array.length;
         array[end] = item;
@@ -77,6 +95,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (array.length >= 16 && size < (array.length / 4)) {
+            /* ugly original code
             T rValue = array[first];
             first = (first + 1) % array.length;
             size = size - 1;
@@ -88,6 +107,8 @@ public class ArrayDeque<T> {
             end = size - 1;
             array = temp;
             return rValue;
+             */
+            resize(array.length / 2);
         }
         T rValue = array[first];
         array[first] = null;
@@ -101,6 +122,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (array.length >= 16 && size < (array.length / 4)) {
+            /* ugly original code
             T rValue = array[end];
             end = (end - 1 + array.length) % array.length;
             size = size - 1;
@@ -112,6 +134,8 @@ public class ArrayDeque<T> {
             end = size - 1;
             array = temp;
             return rValue;
+             */
+            resize(array.length / 2);
         }
         T rValue = array[end];
         array[end] = null;

@@ -9,6 +9,7 @@ public class LinkedListDeque<T> {
             this.next = next;
         }
     };
+    /** may better to add a sentinel node. */
     private TNode first;
     private TNode end;
     private int size;
@@ -16,6 +17,7 @@ public class LinkedListDeque<T> {
     public LinkedListDeque() {
         first = null;
         end = null;
+        size = 0;
     }
 
     public void addFirst(T item) {
