@@ -13,7 +13,8 @@ public class ArrayDeque<T> {
     /** create a resize method to avoid code repeating itself */
     private void resize(int newSize) {
         T[] temp = (T[]) new Object[newSize];
-        for (int i = 0; i < array.length; i++) {
+        int newLength = Math.min(newSize, array.length);
+        for (int i = 0; i < newLength; i++) {
             temp[i] = array[(first + i + array.length) % array.length];
         }
         first = 0;
