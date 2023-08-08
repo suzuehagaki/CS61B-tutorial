@@ -8,7 +8,21 @@ public class Palindrome {
         return cDeque;
     }
 
+    /** perhaps not necessary to use structure Deque */
+    private boolean checkIsLetter(String word) {
+        Deque<Character> cDeque = wordToDeque(word);
+        while (!cDeque.isEmpty()) {
+            Character letter = Character.toLowerCase(cDeque.removeFirst());
+            if (letter > 'z' || letter < 'a') {
+                return false;
+            }
+        }
+        return true;
+    }
     public boolean isPalindrome(String word) {
+        if (!checkIsLetter(word)) {
+            return false;
+        }
         Deque<Character> cDeque = wordToDeque(word);
         while (cDeque.size() > 1) {
             if (cDeque.removeFirst() != cDeque.removeLast()) {
@@ -18,6 +32,7 @@ public class Palindrome {
         return true;
     }
 
+    /**
     public boolean isPalindromeRecursiveHelper(Deque<Character> cDeque) {
         if (cDeque.size() <= 1) {
             return true;
@@ -30,8 +45,12 @@ public class Palindrome {
         Deque<Character> cDeque = wordToDeque(word);
         return isPalindromeRecursiveHelper(cDeque);
     }
+     */
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
+        if (!checkIsLetter(word)) {
+            return false;
+        }
         Deque<Character> cDeque = wordToDeque(word);
         while (cDeque.size() > 1) {
             if (!cc.equalChars(cDeque.removeFirst(), cDeque.removeLast())) {
