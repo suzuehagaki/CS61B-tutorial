@@ -7,7 +7,7 @@ public class Palindrome {
         }
         return cDeque;
     }
-    
+
     public boolean isPalindrome(String word) {
         Deque<Character> cDeque = wordToDeque(word);
         while (cDeque.size() > 1) {
